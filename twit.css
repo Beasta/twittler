@@ -1,9 +1,11 @@
 body {
-    font: 12px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 13px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     color:aqua;
-    padding: 60px 50px;
+    padding: 30px 25px;
     background-color: black;
+    border: double;
+    border-color: whitesmoke;
 }
 
 button {
@@ -40,4 +42,9 @@ button:active {
 
 br {
     font-size: 7px;
+}
+
+article{
+    border: groove;
+    border-color: lawngreen;
 }

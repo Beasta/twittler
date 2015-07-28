@@ -50,24 +50,29 @@
           __proto__: Object*/
 
         while(index >= streams.home.length-10){
-            console.log(index);
-          var tweet = streams.home[index];
-          var timeStamp = tweet.created_at;
+            var tweet = streams.home[index];
+            var timeStamp = tweet.created_at;
 
-          var $tweet = $('<div></div>');
-          var $timeStamp = $('<div ID="timestamp"></div>');
+            var $tweet = $('<div></div>');
+            var $timeStamp = $('<div ID="timestamp"></div>');
+            var $article = $('<article></article>');
 
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);// + " - " + tweet.created_at);
-          $timeStamp.text(" - " + timeStamp);
+            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+            $timeStamp.text(" - " + timeStamp);
 
-          $tweet.prependTo($body);
-          $timeStamp.prependTo($body);
-          $('<br></br>').prependTo($body);
+            $timeStamp.prependTo($article);
+            $tweet.prependTo($article);
 
-          index -= 1;
+            $article.prependTo($body);
+            $('<br></br>').prependTo($body);
+
+            index -= 1;
         }
+
+        $('<br></br>').appendTo($body);
         var $button = $('<button class="mybutton" onclick="update()">Moar Twits</button>')
         $button.appendTo($body);
+
       }
 
       $(document).ready(update());
