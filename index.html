@@ -40,8 +40,17 @@
         var $body = $('body');
         $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
+        var index = streams.home.length - 1; //this sets the index to the end of the message stream
+        //streams.home example: (higher index is later timestamp)
+        /* [0 … 99]
+          0: Object
+          created_at: Tue Jul 28 2015 10:35:01 GMT-0700 (PDT)
+          message: "just wrote my koolaid #ballin"
+          user: "shawndrost"
+          __proto__: Object*/
+
+        while(index >= streams.home.length-10){
+            console.log(index);
           var tweet = streams.home[index];
           var timeStamp = tweet.created_at;
 
