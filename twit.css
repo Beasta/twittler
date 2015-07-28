@@ -1,11 +1,9 @@
 body {
-    font: 13px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font: 12px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
 
     color:aqua;
     padding: 30px 25px;
     background-color: black;
-    border: double;
-    border-color: whitesmoke;
 }
 
 button {
@@ -26,6 +24,8 @@ button {
     padding:6px 24px;
     text-decoration:none;
     text-shadow:0px 1px 0px #c70067;
+    margin-left: auto;
+    margin-right: auto;
 }
 button:hover {
     background-color:#ef027d;
@@ -40,11 +40,20 @@ button:active {
     font-size: 8px;
 }
 
-br {
-    font-size: 7px;
-}
 
 article{
     border: groove;
     border-color: lawngreen;
+    max-width: 99%;
+    margin: 2%;
+    padding 5%;
+}
+
+section {
+    background-color: black;
+    border: double;
+    border-color: whitesmoke;
+    padding: 1% 1%;
+    max-width: 40%;
+    margin: auto;
 }

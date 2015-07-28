@@ -4,6 +4,7 @@
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
     <link rel="stylesheet" href="twit.css" />
+      <title>Twit Me</title>
   </head>
   <body>
     <script>
@@ -36,48 +37,74 @@
        4. Allow the user to click on a username to see that user's timeline.
        *****************************************************************/
 
-      var update=function(){
-        var $body = $('body');
-        $body.html('');
+      var update=function(filterFor){ //accepts argument to filter for a specific user, default state displays all
 
-        var index = streams.home.length - 1; //this sets the index to the end of the message stream
-        //streams.home example: (higher index is later timestamp)
-        /* [0 … 99]
-          0: Object
-          created_at: Tue Jul 28 2015 10:35:01 GMT-0700 (PDT)
-          message: "just wrote my koolaid #ballin"
-          user: "shawndrost"
-          __proto__: Object*/
+          if(filterFor === undefined){
+              filterFor="all";
+          }
 
-        while(index >= streams.home.length-10){
-            var tweet = streams.home[index];
+          var $body = $('body');
+          $body.html('');
+
+          var $section = $('<section></section>');
+
+
+          var source;
+          if ( filterFor === "all"){
+              source = streams.home;
+          } else {
+              source = streams.users[filterFor];
+          }
+
+          var index = source.length -1;
+
+          var twitsReturned;
+          if (index<10){
+              twitsReturned = index;
+          } else {
+              twitsReturned = 10;
+          }
+
+
+        for(var i=index;i>=index-twitsReturned;i--){
+
+            var tweet = source [i];
             var timeStamp = tweet.created_at;
+            var theUser = tweet.user;
+
 
             var $tweet = $('<div></div>');
             var $timeStamp = $('<div ID="timestamp"></div>');
             var $article = $('<article></article>');
+            var $theUser = $('<a></a>');
 
-            $tweet.text('@' + tweet.user + ': ' + tweet.message);
+
+            $theUser.click(function(theUser) {
+
+                update($(this).attr('class'));
+            });
+
+            $theUser.text('@'+theUser);
+            $theUser.addClass(theUser);
+            $tweet.text(': ' + tweet.message);
             $timeStamp.text(" - " + timeStamp);
 
             $timeStamp.prependTo($article);
             $tweet.prependTo($article);
+            $theUser.prependTo($tweet);
 
-            $article.prependTo($body);
-            $('<br></br>').prependTo($body);
-
-            index -= 1;
+            $article.prependTo($section);
         }
 
-        $('<br></br>').appendTo($body);
         var $button = $('<button class="mybutton" onclick="update()">Moar Twits</button>')
-        $button.appendTo($body);
+        $button.appendTo($section);
+        $section.appendTo($body);
 
       }
 
       $(document).ready(update());
 
     </script>
-    <!--<button class="mybutton" onclick="update()">Refresh</button>-->
+
   </body>
 </html>
